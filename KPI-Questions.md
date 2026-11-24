@@ -51,6 +51,11 @@
 - Nuage de points : prix au m² vs loyer au m².
 - Comparaison rendement locatif / prix immobilier.
 - Analyse par type de logement : maison ou appartement.
+- Double courbe : taux de crédit et prix immobilier.
+- Double courbe : taux de crédit et volume des transactions.
+- Corrélation entre taux et évolution des prix.
+- Simulation de capacité d'emprunt sur plusieurs années.
+
 
 ## En vrac
 
