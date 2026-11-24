@@ -10,9 +10,11 @@ __pycache__/
 *.zip
 
 # Folders
-DATA/
-DOCS/
-ZIP/
+Data perso/
+Docs/
+Zip/
+Images perso/
+Notebooks/
 
 # Distribution / packaging
 .Python
