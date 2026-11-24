@@ -10,37 +10,24 @@ Ce projet a pour objectif ...
 ```
 Flandres-Immo/
 │
-├── app.py
+├── Data cleaned/
+│   ├── Fichiers csv nettoyés ...
 │
-├── pages/
-│   ├── 1_Marche_Immobilier.py
-│   ├── 2_Accessibilite.py
-│   ├── 3_Rentabilite_Locative.py
-│   ├── 4_Credit_Immobilier.py
-│   ├── 5_Comparateur_Communes.py
-│   └── 6_Opportunites.py
+├── Docs/
+│   ├── guide-dutilisation-des-donnees.pdf
+│   ├── note-methodologique.pdf
 │
-├── src/
-│   ├── ingestion/
-│   ├── transformation/
-│   ├── analytics/
-│   ├── database/
-│   └── visualization/
+├── Nettoyage/
+│   ├── script.py
+│   ├── agregation.py
 │
-├── sql/
-│   ├── schema.sql
-│   ├── views.sql
-│   └── queries.sql
+├── Analyse/
+│   ├── statistiques.py
 │
-├── data/
-│   ├── raw/
-│   └── processed/
+├── Images/
+│   ├── Dashboard.png
 │
-├── notebooks/
-│
-├── tests/
-│
-├── config/
+├── streamlitApp.py
 │
 ├── requirements.txt
 └── README.md
