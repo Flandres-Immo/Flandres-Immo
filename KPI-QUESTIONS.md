@@ -23,12 +23,17 @@
 - Mettre en parallèle les prix de l'immobilier et les revenus moyens par commune (est-ce que les prix de logements les plus élevés correspondent aux communes avec les revenus les plus importants ?)
 - Mettre en parallèle les prix de l'immobilier et les loyers moyens !
 - Où faut-il acheter ? et Quand acheter ? (faut-il attendre ?)
-- Expliquer le dynamisme d'un marché !
+- Expliquer le dynamisme d'un marché ! (volume des ventes)
 - Dans quelles communes est-il le plus facile d'acheter ?
 - Où les prix immobiliers sont-ils déconnectés des revenus ?
 - Quelles communes sont accessibles aux ménages ayant un revenu moyen de 2 500 € par mois ?
 - Quels territoires présentent le meilleur rapport entre revenus et prix immobiliers ?
 - Existe-t-il des communes où les revenus augmentent moins vite que les prix ?
+- Lorsque les taux augmentent, les prix immobiliers diminuent-ils ?
+- Quel est le délai entre une hausse des taux et une baisse des transactions ?
+- Les communes les plus chères sont-elles plus sensibles aux variations des taux ?
+- Quel a été l'impact de la remontée des taux sur le marché immobilier ?
+- Les prix immobiliers ont-ils résisté malgré la hausse du coût du crédit ?
 
 ## Analyses / Graphiques / Cartes
 
@@ -41,6 +46,11 @@
 - Classement Top 10 / Flop 10 des communes
 - Histogramme de distribution des prix
 - Comparaison maisons / appartements
+- Carte des rendements locatifs par commune.
+- Classement des communes selon leur rentabilité.
+- Nuage de points : prix au m² vs loyer au m².
+- Comparaison rendement locatif / prix immobilier.
+- Analyse par type de logement : maison ou appartement.
 
 ## En vrac
 
@@ -49,3 +59,12 @@
 - Quelles communes sont accessibles aux ménages ayant un revenu moyen de 2 500 € par mois ?
 - Quels territoires présentent le meilleur rapport entre revenus et prix immobiliers ?
 - Existe-t-il des communes où les revenus augmentent moins vite que les prix ?
+- Quelles sont les 100 communes les plus rentables pour investir ?
+- Les communes les moins chères sont-elles systématiquement les plus rentables ?
+- Existe-t-il des communes avec des loyers élevés et des prix immobiliers faibles ?
+- Quels départements présentent le meilleur rendement locatif ?
+- Où investir pour maximiser le rendement avec un budget de 150 000 € ?
+- Rendement locatif.
+- Évolution du prix immobilier.
+- Dynamique des transactions.
+- Niveau de risque lié à la faiblesse du volume de transactions.
