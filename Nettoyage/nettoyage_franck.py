@@ -39,7 +39,7 @@ COLUMNS_TO_KEEP = [
     'code_commune', 
     'nom_commune', 
     'code_departement', 
-    'code_type_local', 
+    # 'code_type_local', 
     'type_local', 
     'surface_reelle_bati', 
     'nombre_pieces_principales', 
@@ -47,18 +47,21 @@ COLUMNS_TO_KEEP = [
 ]
 
 
-def nettoyage(file_source:str, file_target:str) -> None:
+def nettoyage(file_source:str) -> None:
     '''
         Nettoyage du fichier file_source
 
         Args:
 
         Return:
-
     '''
-    print(f'=== CLEANING FILE : {file_source} ===')
 
-    df = pd.read_csv(file_source, encoding=ENCODING_UTF8, sep=',')
+    print('=' * 60)
+    print(f'====== CLEANING FILE : {file_source:30} ======')
+    print('=' * 60 + '\n')
+
+    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + file_source}')
+    df = pd.read_csv(PATH_FOLDER_SOURCE + file_source, encoding=ENCODING_UTF8, sep=',')
     print(f'Initial shape : {df.shape}')
 
     # On conserve certaines colonnes :
@@ -69,8 +72,8 @@ def nettoyage(file_source:str, file_target:str) -> None:
     print(f'Shape Après conservation des maisons et appartements : {df.shape}')
 
     # Suppression des lignes ayant un 'code_type_local' vide
-    df = df.dropna(subset=['code_type_local'])
-    print(f"Shape Après suppression des 'code_type_local' vides : {df.shape}")
+    # df = df.dropna(subset=['code_type_local'])
+    # print(f"Shape Après suppression des 'code_type_local' vides : {df.shape}")
 
     # ----------------------------
     # Conversion des types
@@ -92,10 +95,6 @@ def nettoyage(file_source:str, file_target:str) -> None:
     df['code_departement'] = df['code_departement'].fillna(0)
     df['code_departement'] = pd.to_numeric(df['code_departement'], errors='coerce').astype('Int64')
 
-    df['code_type_local'] = pd.to_numeric(df['code_type_local'], errors='coerce').astype('Int64')
-    # Suppression des NaN
-    df = df.dropna(subset=['code_type_local'])
-
     df['surface_reelle_bati'] = df['surface_reelle_bati'].fillna(0)
     df['surface_reelle_bati'] = (pd.to_numeric(df['surface_reelle_bati'], errors='coerce').round().astype('Int64'))
 
@@ -105,18 +104,17 @@ def nettoyage(file_source:str, file_target:str) -> None:
     df['surface_terrain'] = df['surface_terrain'].fillna(0)
     df['surface_terrain'] = (pd.to_numeric(df['surface_terrain'], errors='coerce').round().astype('Int64'))
 
-    df[['type_local', 'code_type_local']].value_counts()
+    # Suppression des doublons
+    df = df.drop_duplicates()
+    print(f"Shape Après suppression des doublons : {df.shape}")
 
     # Write file in target folder
-    print(f'Ecriture du fichier {file_target}')
-    df.to_csv(file_target)
+    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}\n')
+    df.to_csv(PATH_FOLDER_TARGET + filename)
 
 
 if __name__ == '__main__':
 
-    print("------------------")
     for filename in lst_filenames:
-        print(filename)
-        nettoyage(PATH_FOLDER_SOURCE + filename,
-                       PATH_FOLDER_TARGET + filename)
+        nettoyage(filename)
 
