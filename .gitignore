@@ -6,6 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 # Files
@@ -19,7 +20,8 @@ Images perso/
 Notebooks/
 .venv/
 
->>>>>>> Stashed changes
+
+
 # Distribution / packaging
 .Python
 build/
@@ -235,3 +237,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# folder 
+Data/
+code_netoyage_csv.py 
+.venv/
