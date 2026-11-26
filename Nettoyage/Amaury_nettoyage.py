@@ -28,7 +28,7 @@ colonnes_a_garder = [
     "date_mutation",
     "nature_mutation",
     "valeur_fonciere",
-    "code_postal",
+    "code_postal", --
     "code_commune",
     "nom_commune",
     "code_departement",
