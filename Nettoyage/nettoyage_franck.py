@@ -5,9 +5,10 @@ import numpy as np
 import pandas as pd
 
 # Folders with data
-PATH_FOLDER_SOURCE = "../Data perso/DATA BRONZE/"
-PATH_FOLDER_TARGET = "../Data perso/DATA SILVER/"
+PATH_FOLDER_SOURCE = "../Data/Bronze/"
+PATH_FOLDER_TARGET = "../Data/Silver/"
 
+# Encoding
 ENCODING_UTF8   = 'utf-8'
 ENCODING_CP1252 = 'cp1252'
 
@@ -43,23 +44,25 @@ COLUMNS_INDICATEURS_TO_KEEP = [
 ]
 
 
-def nettoyage_dvf(file_source:str) -> None:
+def nettoyage_dvf(filename:str) -> None:
     '''
-        Nettoyage du fichier 'DVF' : file_source
+        Nettoyage du fichier 'DVF' : filename
         (Conservation des colonnes strictement utiles)
         Ecrit un fichier nettoyé dans le dossier PATH_FOLDER_TARGET
 
-        Args: file_source: fichier de données à nettoyer
+        Args: filename: fichier de données à nettoyer
 
         Return: None
     '''
 
-    print('=' * 60)
-    print(f'====== CLEANING FILE : {file_source:30} ======')
-    print('=' * 60 + '\n')
+    print('=' * 80)
+    text = f'CLEANING FILE : {filename}'
+    print(f'===== {text:^68} =====')
+    print('=' * 80 + '\n')
 
-    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + file_source}')
-    df = pd.read_csv(PATH_FOLDER_SOURCE + file_source, encoding=ENCODING_UTF8, sep=',')
+    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + filename}')
+    print(f'*** Taille  du fichier : {os.path.getsize(PATH_FOLDER_SOURCE + filename)}')
+    df = pd.read_csv(PATH_FOLDER_SOURCE + filename, encoding=ENCODING_UTF8, sep=',')
     print(f'Initial shape : {df.shape}')
 
     # On conserve certaines colonnes :
@@ -103,26 +106,31 @@ def nettoyage_dvf(file_source:str) -> None:
     print(f"Shape Après suppression des doublons : {df.shape}")
 
     # Write file in target folder
-    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}\n')
+    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
     df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_UTF8, sep=',')
+    
+    # On affiche la taille finale du fichier 
+    print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
 
 
-def nettoyage_indicateurs(file_source:str) -> None:
+
+def nettoyage_indicateurs(filename:str) -> None:
     '''
-        Nettoyage du fichier "Indicateurs" : file_source
+        Nettoyage du fichier "Indicateurs" : filename
         Ecrit un fichier nettoyé dans le dossier PATH_FOLDER_TARGET
 
-        Args: file_source: fichier de données à nettoyer
+        Args: filename: fichier de données à nettoyer
 
         Return: None
     '''
-    print('=' * 60)
-    texte = f'CLEANING FILE : {file_source:30}'
-    print(f'====== {texte:=^30} ======')
-    print('=' * 60 + '\n')
+    print('=' * 80)
+    text = f'CLEANING FILE : {filename}'
+    print(f'===== {text:^68} =====')
+    print('=' * 80 + '\n')
 
-    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + file_source}')
-    df = pd.read_csv(PATH_FOLDER_SOURCE + file_source, encoding=ENCODING_CP1252, sep=';')
+    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + filename}')
+    print(f'*** Taille  du fichier : {os.path.getsize(PATH_FOLDER_SOURCE + filename)}')
+    df = pd.read_csv(PATH_FOLDER_SOURCE + filename, encoding=ENCODING_CP1252, sep=';')
     print(f'Initial shape : {df.shape}')
 
     # On conserve certaines colonnes :
@@ -145,19 +153,23 @@ def nettoyage_indicateurs(file_source:str) -> None:
     print(f"Shape Après suppression des doublons : {df.shape}")
 
     # Write file in target folder
-    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + file_source}\n')
-    df.to_csv(PATH_FOLDER_TARGET + file_source, encoding=ENCODING_CP1252, sep=',')
+    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
+    df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_CP1252, sep=',')
+
+    # On affiche la taille finale du fichier 
+    print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
 
 
 
 
 if __name__ == '__main__':
 
+    # On parcourt tous les fichiers
+    # Selon le nom du fichier on applique la fonction de nettoyage correspondante
     for filename in os.listdir(PATH_FOLDER_SOURCE):
 
-        print("taille", os.path.getsize(PATH_FOLDER_SOURCE + filename))
         if filename[:3].lower() == 'dvf':
             nettoyage_dvf(filename)
 
-        elif filename[:11].lower() == 'indicateurs':
+        if filename[:11].lower() == 'indicateurs':
             nettoyage_indicateurs(filename)
