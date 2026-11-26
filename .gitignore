@@ -6,6 +6,21 @@ __pycache__/
 # C extensions
 *.so
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+# Files
+*.zip
+
+# Folders
+Data perso/
+Docs/
+Zip/
+Images perso/
+Notebooks/
+.venv/
+
+
 
 # Distribution / packaging
 .Python
