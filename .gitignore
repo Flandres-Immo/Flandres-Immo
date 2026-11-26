@@ -2,9 +2,10 @@
 __pycache__/
 *.py[codz]
 *$py.class
-Data/
+
 # C extensions
 *.so
+
 
 # Distribution / packaging
 .Python
@@ -221,4 +222,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# folder 
+Data/
+code_netoyage_csv.py 
+.venv/
 /drive-download-20261124T124355Z-1-001/
