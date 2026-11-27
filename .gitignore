@@ -227,3 +227,8 @@ Data/
 code_netoyage_csv.py 
 .venv/
 explication.txt
+nettoyage_revenus.ipynb 
+nettoyage_loyer.ipynb
+nettoyage_csv.ipynb  
+Data_clean/
+code_netoyage_csv.py 
