@@ -6,6 +6,18 @@ __pycache__/
 # C extensions
 *.so
 
+# Files
+*.zip
+
+# Folders
+Data perso/
+Docs/
+Zip/
+Images perso/
+Notebooks/
+.venv/
+
+
 
 # Distribution / packaging
 .Python
@@ -227,3 +239,4 @@ Data/
 code_netoyage_csv.py 
 .venv/
 /drive-download-20261124T124355Z-1-001/
+explication.txt

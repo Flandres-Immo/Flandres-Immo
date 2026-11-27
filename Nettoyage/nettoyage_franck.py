@@ -1,36 +1,18 @@
+
 import os
 import sys
 import numpy as np
 import pandas as pd
 
-pd.set_option('display.max_columns', 50)
-pd.set_option('display.max_rows', 20)
-
 # Folders with data
-PATH_FOLDER_SOURCE = "../Data perso/DATA BRONZE/"
-PATH_FOLDER_TARGET = "../Data perso/DATA SILVER/"
+PATH_FOLDER_SOURCE = "../Data/Bronze/"
+PATH_FOLDER_TARGET = "../Data/Silver/"
 
-# Filenames
+# Encoding
+ENCODING_UTF8   = 'utf-8'
+ENCODING_CP1252 = 'cp1252'
 
-# File Ille et Vilaine
-name_iev = "Ille et Vilaine"
-filename_iev = "dvf Ille et Vilaine.csv"
-# File Loire Atlantique
-name_la = "Loire Atlantique"
-filename_la  = "dvf Loire Atlantique.csv"
-# File Rhone
-name_r = "Rhone"
-filename_r  = "dvf Rhone.csv"
-# Indicateurs loyers maison.csv
-name_lm = "Indicateurs loyers maison"
-filename_lm = "Indicateurs loyers maison.csv"
-
-lst_names = [name_iev, name_la, name_r]
-lst_filenames = [filename_iev, filename_la, filename_r]
-
-ENCODING_UTF8 = 'utf-8'
-
-COLUMNS_TO_KEEP = [
+COLUMNS_DVF_TO_KEEP = [
     'id_mutation', 
     'date_mutation', 
     'nature_mutation', 
@@ -39,41 +21,56 @@ COLUMNS_TO_KEEP = [
     'code_commune', 
     'nom_commune', 
     'code_departement', 
-    # 'code_type_local', 
     'type_local', 
     'surface_reelle_bati', 
     'nombre_pieces_principales', 
     'surface_terrain'
 ]
 
+COLUMNS_INDICATEURS_TO_KEEP = [
+    'id_zone',
+	'INSEE_C',
+   	'LIBGEO',
+   	'EPCI',
+	'DEP',
+    'REG',
+    'loypredm2',
+    'lwr.IPm2',
+    'upr.IPm2',
+    'TYPPRED',
+    'nbobs_com',
+    'nbobs_mail',	
+    'R2_adj',
+]
 
-def nettoyage(file_source:str) -> None:
+
+def nettoyage_dvf(filename:str) -> None:
     '''
-        Nettoyage du fichier file_source
+        Nettoyage du fichier 'DVF' : filename
+        (Conservation des colonnes strictement utiles)
+        Ecrit un fichier nettoyé dans le dossier PATH_FOLDER_TARGET
 
-        Args:
+        Args: filename: fichier de données à nettoyer
 
-        Return:
+        Return: None
     '''
 
-    print('=' * 60)
-    print(f'====== CLEANING FILE : {file_source:30} ======')
-    print('=' * 60 + '\n')
+    print('=' * 80)
+    text = f'CLEANING FILE : {filename}'
+    print(f'===== {text:^68} =====')
+    print('=' * 80 + '\n')
 
-    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + file_source}')
-    df = pd.read_csv(PATH_FOLDER_SOURCE + file_source, encoding=ENCODING_UTF8, sep=',')
+    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + filename}')
+    print(f'*** Taille  du fichier : {os.path.getsize(PATH_FOLDER_SOURCE + filename)}')
+    df = pd.read_csv(PATH_FOLDER_SOURCE + filename, encoding=ENCODING_UTF8, sep=',')
     print(f'Initial shape : {df.shape}')
 
     # On conserve certaines colonnes :
-    df = df[COLUMNS_TO_KEEP]
+    df = df[COLUMNS_DVF_TO_KEEP]
 
     # On conserve uniquement les maisons et appartements
     df = df[df['type_local'].isin(['Maison', 'Appartement'])]
     print(f'Shape Après conservation des maisons et appartements : {df.shape}')
-
-    # Suppression des lignes ayant un 'code_type_local' vide
-    # df = df.dropna(subset=['code_type_local'])
-    # print(f"Shape Après suppression des 'code_type_local' vides : {df.shape}")
 
     # ----------------------------
     # Conversion des types
@@ -109,12 +106,70 @@ def nettoyage(file_source:str) -> None:
     print(f"Shape Après suppression des doublons : {df.shape}")
 
     # Write file in target folder
-    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}\n')
-    df.to_csv(PATH_FOLDER_TARGET + filename)
+    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
+    df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_UTF8, sep=',')
+    
+    # On affiche la taille finale du fichier 
+    print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
+
+
+
+def nettoyage_indicateurs(filename:str) -> None:
+    '''
+        Nettoyage du fichier "Indicateurs" : filename
+        Ecrit un fichier nettoyé dans le dossier PATH_FOLDER_TARGET
+
+        Args: filename: fichier de données à nettoyer
+
+        Return: None
+    '''
+    print('=' * 80)
+    text = f'CLEANING FILE : {filename}'
+    print(f'===== {text:^68} =====')
+    print('=' * 80 + '\n')
+
+    print(f'Lecture du fichier : {PATH_FOLDER_SOURCE + filename}')
+    print(f'*** Taille  du fichier : {os.path.getsize(PATH_FOLDER_SOURCE + filename)}')
+    df = pd.read_csv(PATH_FOLDER_SOURCE + filename, encoding=ENCODING_CP1252, sep=';')
+    print(f'Initial shape : {df.shape}')
+
+    # On conserve certaines colonnes :
+    df = df[COLUMNS_INDICATEURS_TO_KEEP]
+
+    # Conversion de types en entier
+    colonnes = ['id_zone', 'INSEE_C', 'EPCI', 'DEP', 'REG',	'nbobs_com', 'nbobs_mail']
+    df[colonnes] = df[colonnes].apply(pd.to_numeric, errors='coerce').astype('Int64')
+
+    # Conversion de types en décimal avec 2 chiffres après la virgule
+    colonnes = ['loypredm2', 'lwr.IPm2', 'upr.IPm2', 'R2_adj']
+    df[colonnes] = df[colonnes].apply(
+        lambda x: pd.to_numeric(
+            x.str.replace(',', '.', regex=False),
+            errors='coerce'
+        )
+    ).round(2)
+
+    df = df.drop_duplicates()
+    print(f"Shape Après suppression des doublons : {df.shape}")
+
+    # Write file in target folder
+    print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
+    df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_CP1252, sep=',')
+
+    # On affiche la taille finale du fichier 
+    print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
+
+
 
 
 if __name__ == '__main__':
 
-    for filename in lst_filenames:
-        nettoyage(filename)
+    # On parcourt tous les fichiers
+    # Selon le nom du fichier on applique la fonction de nettoyage correspondante
+    for filename in os.listdir(PATH_FOLDER_SOURCE):
 
+        if filename[:3].lower() == 'dvf':
+            nettoyage_dvf(filename)
+
+        if filename[:11].lower() == 'indicateurs':
+            nettoyage_indicateurs(filename)
