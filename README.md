@@ -11,28 +11,32 @@ Ce projet a pour objectif ...
 Flandres-Immo/
 │
 ├── Data/
-│   ├── Bronze
+│   ├── Bronze/
 │   │   ├── dvf Alpes Maritimes.csv 
 │   │   ⋮
 │   │ 
-│   ├── Silver
+│   ├── Silver/
 │   │   ├── dvf Alpes Maritimes.csv 
 │   │   ⋮
 │
+├── Database/
+│   ├── scriptCreationDB.py
+|   └── dashboard.duckdb
+|
 ├── Docs/
 │   ├── guide-dutilisation-des-donnees.pdf
-│   ├── note-methodologique.pdf
+│   └── note-methodologique.pdf
 │
 ├── Nettoyage/
 │   ├── script.py
-│   ├── agregation.py
+│   └── agregation.py
 │
 ├── Analyse/
 │   ├── volumetrie.py
-│   ├── statistiques.py
+│   └── statistiques.py
 │
 ├── Images/
-│   ├── Dashboard.png
+│   └── Dashboard.png
 │
 ├── Pages/
 │   ├── 1_page.py
@@ -61,4 +65,12 @@ Flandres-Immo/
 Toutes les données sont ici :
 [Google Drive](https://drive.google.com/drive/folders/1v3lk3WeW6DYH5Ws5RH9IZJtzijcrBrjb?usp=drive_link)
 
+## Etapes à suivre
 
+- Faire un "git clone" du repository
+- Mettre les fichiers brutes CSV dans le dossier Data/Bronze
+- lancer le script : Nettoyage/scriptNettoyage.py
+  (cela va remplir le dossier Data/silver avec les données  nettoyées)
+- lancer le script : Database/scriptCreationDB.py
+  (cela va créer la base de donnée et le fichier dashboard.duckdb)
+- ...

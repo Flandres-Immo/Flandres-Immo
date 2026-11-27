@@ -107,7 +107,7 @@ def nettoyage_dvf(filename:str) -> None:
 
     # Write file in target folder
     print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
-    df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_UTF8, sep=',')
+    df.to_csv(PATH_FOLDER_TARGET + filename, index=False, encoding=ENCODING_UTF8, sep=',')
     
     # On affiche la taille finale du fichier 
     print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
@@ -154,7 +154,8 @@ def nettoyage_indicateurs(filename:str) -> None:
 
     # Write file in target folder
     print(f'Ecriture du fichier {PATH_FOLDER_TARGET + filename}')
-    df.to_csv(PATH_FOLDER_TARGET + filename, encoding=ENCODING_CP1252, sep=',')
+    # df.to_csv(PATH_FOLDER_TARGET + filename, index=False, encoding=ENCODING_CP1252, sep=',')
+    df.to_csv(PATH_FOLDER_TARGET + filename, index=False, encoding=ENCODING_UTF8, sep=',')
 
     # On affiche la taille finale du fichier 
     print(f'*** Taille  du fichier final : {os.path.getsize(PATH_FOLDER_TARGET + filename)}\n')
@@ -171,5 +172,8 @@ if __name__ == '__main__':
         if filename[:3].lower() == 'dvf':
             nettoyage_dvf(filename)
 
-        if filename[:11].lower() == 'indicateurs':
+        elif filename[:11].lower() == 'indicateurs':
             nettoyage_indicateurs(filename)
+
+        elif filename[:7].lower() == 'revenus':
+            pass

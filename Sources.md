@@ -1,5 +1,11 @@
 # Sources
 
+## Fichiers partagés
+
+[Google Drive](https://drive.google.com/drive/folders/1v3lk3WeW6DYH5Ws5RH9IZJtzijcrBrjb?usp=drive_link)
+
+## Liens
+
 [Data Gouv loyers-prix-et-rendement-locatif-brut-par-commune-millesime-2026](https://www.data.gouv.fr/datasets/loyers-prix-et-rendement-locatif-brut-par-commune-millesime-2026?utm_source=chatgpt.com&resource_id=776bd0d6-23b0-4e93-a7af-02677374e713)
 
 [Statistiques DVF](https://www.data.gouv.fr/datasets/statistiques-dvf)
@@ -12,8 +18,3 @@
 
 [Loyers communes](https://www.data.gouv.fr/datasets/carte-des-loyers-indicateurs-de-loyers-dannonce-par-commune-en-2025?utm_source=chatgpt.com)
 
-Taima
-Indicateurs loyers appartement 1 ou 2 pieces.csv
-dvf Alpes Maritimes.csv
-dvf Nord.csv
-revenus-en-france-geoptis.xlsx
