@@ -6,9 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 # Files
 *.zip
 
@@ -241,3 +238,5 @@ __marimo__/
 Data/
 code_netoyage_csv.py 
 .venv/
+/drive-download-20261124T124355Z-1-001/
+explication.txt
